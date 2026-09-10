@@ -204,20 +204,49 @@
             border-radius: 15px;
             padding: 30px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            text-align: center;
+        }
+
+        .calc-tabs {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .calc-tab-btn {
+            padding: 12px 8px;
+            border: 2px solid #ddd;
+            background: white;
+            color: #333;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+
+        .calc-tab-btn:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .calc-tab-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
         }
 
         .calculator-section h2 {
             color: #333;
-            margin-bottom: 25px;
-            font-size: 22px;
+            margin-bottom: 15px;
+            font-size: 18px;
+            text-align: center;
         }
 
         .calculator {
             background: #f8f9fa;
             border-radius: 10px;
             padding: 20px;
-            max-width: 100%;
         }
 
         .calc-display {
@@ -231,17 +260,94 @@
             min-height: 60px;
             word-wrap: break-word;
             word-break: break-all;
+            overflow: hidden;
         }
 
-        .calc-buttons {
+        /* BASIC CALCULATOR */
+        .calc-buttons-basic {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 10px;
         }
 
+        /* SCIENTIFIC CALCULATOR */
+        .calc-buttons-scientific {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+        }
+
+        /* MORTGAGE CALCULATOR */
+        .mortgage-inputs {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .input-group label {
+            font-weight: 600;
+            color: #333;
+            font-size: 12px;
+        }
+
+        .input-group input {
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .calc-result {
+            background: #e8f0ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            text-align: center;
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* BMI CALCULATOR */
+        .bmi-inputs {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .bmi-result {
+            background: #e8f0ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .bmi-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .bmi-category {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+
         button {
-            padding: 18px;
-            font-size: 16px;
+            padding: 14px;
+            font-size: 14px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -267,6 +373,14 @@
             background: #63398b;
         }
 
+        .calc-btn.paren {
+            background: #ff9800;
+        }
+
+        .calc-btn.paren:hover {
+            background: #f57c00;
+        }
+
         .calc-btn.equals {
             background: #22c55e;
             grid-column: span 2;
@@ -283,6 +397,20 @@
 
         .calc-btn.clear:hover {
             background: #dc2626;
+        }
+
+        .calc-btn-calc {
+            background: #667eea;
+            color: white;
+            width: 100%;
+        }
+
+        .calc-btn-calc:hover {
+            background: #5568d3;
+        }
+
+        .calc-btn-calc:active {
+            transform: scale(0.98);
         }
 
         /* VERTICAL AD RIGHT */
@@ -338,6 +466,10 @@
             color: #7f1d1d;
         }
 
+        .hidden {
+            display: none;
+        }
+
         @media (max-width: 1024px) {
             .calculator-wrapper {
                 grid-template-columns: 1fr;
@@ -347,6 +479,10 @@
             .ad-vertical-right {
                 min-height: auto;
                 max-height: 150px;
+            }
+
+            .calc-tabs {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -373,13 +509,18 @@
                 padding: 15px;
             }
 
-            .calc-buttons {
-                gap: 8px;
+            .calc-tabs {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .calc-tab-btn {
+                padding: 10px 6px;
+                font-size: 11px;
             }
 
             button {
-                padding: 14px;
-                font-size: 14px;
+                padding: 12px;
+                font-size: 12px;
             }
         }
     </style>
@@ -435,31 +576,134 @@
 
             <!-- CALCULATOR (CENTERED) -->
             <div class="calculator-section">
-                <h2>🧮 Simple Calculator</h2>
-                <div class="calculator">
-                    <div class="calc-display" id="calc-display">0</div>
-                    <div class="calc-buttons">
-                        <button class="calc-btn clear" onclick="calcClear()">C</button>
-                        <button class="calc-btn operator" onclick="calcAppend('/')">/</button>
-                        <button class="calc-btn operator" onclick="calcAppend('*')">×</button>
-                        
-                        <button class="calc-btn" onclick="calcAppend('7')">7</button>
-                        <button class="calc-btn" onclick="calcAppend('8')">8</button>
-                        <button class="calc-btn" onclick="calcAppend('9')">9</button>
-                        <button class="calc-btn operator" onclick="calcAppend('-')">−</button>
-                        
-                        <button class="calc-btn" onclick="calcAppend('4')">4</button>
-                        <button class="calc-btn" onclick="calcAppend('5')">5</button>
-                        <button class="calc-btn" onclick="calcAppend('6')">6</button>
-                        <button class="calc-btn operator" onclick="calcAppend('+')">+</button>
-                        
-                        <button class="calc-btn" onclick="calcAppend('1')">1</button>
-                        <button class="calc-btn" onclick="calcAppend('2')">2</button>
-                        <button class="calc-btn" onclick="calcAppend('3')">3</button>
-                        <button class="calc-btn" onclick="calcAppend('.')">.</button>
-                        
-                        <button class="calc-btn" onclick="calcAppend('0')">0</button>
-                        <button class="calc-btn equals" onclick="calcEquals()">=</button>
+                <!-- CALCULATOR TABS -->
+                <div class="calc-tabs">
+                    <button class="calc-tab-btn active" onclick="switchCalculator('basic')">🧮 Basic</button>
+                    <button class="calc-tab-btn" onclick="switchCalculator('scientific')">🔬 Scientific</button>
+                    <button class="calc-tab-btn" onclick="switchCalculator('mortgage')">🏠 Mortgage</button>
+                    <button class="calc-tab-btn" onclick="switchCalculator('bmi')">⚖️ BMI</button>
+                </div>
+
+                <!-- BASIC CALCULATOR -->
+                <div id="basic-calc" class="calculator-content">
+                    <h2>🧮 Basic Calculator</h2>
+                    <div class="calculator">
+                        <div class="calc-display" id="calc-display">0</div>
+                        <div class="calc-buttons-basic">
+                            <button class="calc-btn clear" onclick="calcClear()">C</button>
+                            <button class="calc-btn operator" onclick="calcAppend('/')">/</button>
+                            <button class="calc-btn operator" onclick="calcAppend('*')">×</button>
+                            <button class="calc-btn operator" onclick="calcAppend('-')">−</button>
+                            
+                            <button class="calc-btn" onclick="calcAppend('7')">7</button>
+                            <button class="calc-btn" onclick="calcAppend('8')">8</button>
+                            <button class="calc-btn" onclick="calcAppend('9')">9</button>
+                            <button class="calc-btn operator" onclick="calcAppend('+')">+</button>
+                            
+                            <button class="calc-btn" onclick="calcAppend('4')">4</button>
+                            <button class="calc-btn" onclick="calcAppend('5')">5</button>
+                            <button class="calc-btn" onclick="calcAppend('6')">6</button>
+                            <button class="calc-btn" onclick="calcAppend('.')">.</button>
+                            
+                            <button class="calc-btn" onclick="calcAppend('1')">1</button>
+                            <button class="calc-btn" onclick="calcAppend('2')">2</button>
+                            <button class="calc-btn" onclick="calcAppend('3')">3</button>
+                            <button class="calc-btn equals" onclick="calcEquals()">=</button>
+                            
+                            <button class="calc-btn" onclick="calcAppend('0')" style="grid-column: span 2;">0</button>
+                            <button class="calc-btn" onclick="calcBackspace()">⌫</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SCIENTIFIC CALCULATOR -->
+                <div id="scientific-calc" class="calculator-content hidden">
+                    <h2>🔬 Scientific Calculator</h2>
+                    <div class="calculator">
+                        <div class="calc-display" id="sci-display">0</div>
+                        <div class="calc-buttons-scientific">
+                            <button class="calc-btn clear" onclick="sciClear()">C</button>
+                            <button class="calc-btn paren" onclick="sciAppend('(')">(</button>
+                            <button class="calc-btn paren" onclick="sciAppend(')')">)</button>
+                            <button class="calc-btn operator" onclick="sciAppend('/')">/</button>
+                            <button class="calc-btn" onclick="sciAppend('π')">π</button>
+                            
+                            <button class="calc-btn" onclick="sciAppend('sin(')">sin</button>
+                            <button class="calc-btn" onclick="sciAppend('cos(')">cos</button>
+                            <button class="calc-btn" onclick="sciAppend('tan(')">tan</button>
+                            <button class="calc-btn operator" onclick="sciAppend('*')">×</button>
+                            <button class="calc-btn" onclick="sciAppend('√(')">√</button>
+                            
+                            <button class="calc-btn" onclick="sciAppend('7')">7</button>
+                            <button class="calc-btn" onclick="sciAppend('8')">8</button>
+                            <button class="calc-btn" onclick="sciAppend('9')">9</button>
+                            <button class="calc-btn operator" onclick="sciAppend('-')">−</button>
+                            <button class="calc-btn" onclick="sciAppend('^')">^</button>
+                            
+                            <button class="calc-btn" onclick="sciAppend('4')">4</button>
+                            <button class="calc-btn" onclick="sciAppend('5')">5</button>
+                            <button class="calc-btn" onclick="sciAppend('6')">6</button>
+                            <button class="calc-btn operator" onclick="sciAppend('+')">+</button>
+                            <button class="calc-btn" onclick="sciAppend('log(')">log</button>
+                            
+                            <button class="calc-btn" onclick="sciAppend('1')">1</button>
+                            <button class="calc-btn" onclick="sciAppend('2')">2</button>
+                            <button class="calc-btn" onclick="sciAppend('3')">3</button>
+                            <button class="calc-btn" onclick="sciAppend('.')">.</button>
+                            <button class="calc-btn" onclick="sciAppend('!')" style="grid-column: span 1;">!</button>
+                            
+                            <button class="calc-btn" onclick="sciAppend('0')" style="grid-column: span 2;">0</button>
+                            <button class="calc-btn" onclick="sciBackspace()">⌫</button>
+                            <button class="calc-btn equals" onclick="sciEquals()" style="grid-column: span 2;">=</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MORTGAGE CALCULATOR -->
+                <div id="mortgage-calc" class="calculator-content hidden">
+                    <h2>🏠 Mortgage Calculator</h2>
+                    <div class="calculator">
+                        <div class="mortgage-inputs">
+                            <div class="input-group">
+                                <label>Loan Amount ($)</label>
+                                <input type="number" id="mortgage-amount" placeholder="e.g., 300000" value="300000">
+                            </div>
+                            <div class="input-group">
+                                <label>Annual Interest Rate (%)</label>
+                                <input type="number" id="mortgage-rate" placeholder="e.g., 6.5" value="6.5" step="0.01">
+                            </div>
+                            <div class="input-group">
+                                <label>Loan Term (Years)</label>
+                                <input type="number" id="mortgage-years" placeholder="e.g., 30" value="30">
+                            </div>
+                            <button class="calc-btn-calc" onclick="calcMortgage()">Calculate Monthly Payment</button>
+                        </div>
+                        <div id="mortgage-result" class="calc-result hidden">
+                            <div>Monthly Payment</div>
+                            <div style="font-size: 24px; margin-top: 10px;" id="mortgage-payment">$0.00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BMI CALCULATOR -->
+                <div id="bmi-calc" class="calculator-content hidden">
+                    <h2>⚖️ BMI Calculator</h2>
+                    <div class="calculator">
+                        <div class="bmi-inputs">
+                            <div class="input-group">
+                                <label>Height (cm)</label>
+                                <input type="number" id="bmi-height" placeholder="e.g., 175" value="175">
+                            </div>
+                            <div class="input-group">
+                                <label>Weight (kg)</label>
+                                <input type="number" id="bmi-weight" placeholder="e.g., 70" value="70">
+                            </div>
+                            <button class="calc-btn-calc" onclick="calcBMI()">Calculate BMI</button>
+                        </div>
+                        <div id="bmi-result" class="bmi-result hidden">
+                            <div class="bmi-value" id="bmi-value">0</div>
+                            <div class="bmi-category" id="bmi-category">Category</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -484,7 +728,27 @@
     </div>
 
     <script>
-        // ============ CALCULATOR FUNCTIONS ============
+        // ============ CALCULATOR SWITCHING ============
+        function switchCalculator(type) {
+            // Hide all calculators
+            document.getElementById('basic-calc').classList.add('hidden');
+            document.getElementById('scientific-calc').classList.add('hidden');
+            document.getElementById('mortgage-calc').classList.add('hidden');
+            document.getElementById('bmi-calc').classList.add('hidden');
+
+            // Remove active class from all tabs
+            document.querySelectorAll('.calc-tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected calculator
+            document.getElementById(type + '-calc').classList.remove('hidden');
+            
+            // Set active tab
+            event.target.classList.add('active');
+        }
+
+        // ============ BASIC CALCULATOR FUNCTIONS ============
         let calcDisplay = document.getElementById('calc-display');
         let currentInput = '0';
 
@@ -506,6 +770,11 @@
             calcUpdateDisplay();
         }
 
+        function calcBackspace() {
+            currentInput = currentInput.slice(0, -1) || '0';
+            calcUpdateDisplay();
+        }
+
         function calcEquals() {
             try {
                 currentInput = String(eval(currentInput));
@@ -515,6 +784,104 @@
                 calcUpdateDisplay();
                 setTimeout(calcClear, 1500);
             }
+        }
+
+        // ============ SCIENTIFIC CALCULATOR FUNCTIONS ============
+        let sciDisplay = document.getElementById('sci-display');
+        let sciInput = '0';
+
+        function sciUpdateDisplay() {
+            sciDisplay.textContent = sciInput || '0';
+        }
+
+        function sciAppend(value) {
+            if (sciInput === '0' && value !== '.' && !isNaN(value)) {
+                sciInput = value;
+            } else {
+                sciInput += value;
+            }
+            sciUpdateDisplay();
+        }
+
+        function sciClear() {
+            sciInput = '0';
+            sciUpdateDisplay();
+        }
+
+        function sciBackspace() {
+            sciInput = sciInput.slice(0, -1) || '0';
+            sciUpdateDisplay();
+        }
+
+        function sciEquals() {
+            try {
+                let expression = sciInput;
+                // Replace custom functions with Math functions
+                expression = expression.replace(/sin\(/g, 'Math.sin(');
+                expression = expression.replace(/cos\(/g, 'Math.cos(');
+                expression = expression.replace(/tan\(/g, 'Math.tan(');
+                expression = expression.replace(/√\(/g, 'Math.sqrt(');
+                expression = expression.replace(/log\(/g, 'Math.log10(');
+                expression = expression.replace(/π/g, 'Math.PI');
+                expression = expression.replace(/\^/g, '**');
+                expression = expression.replace(/!/g, '');
+
+                // Handle factorial
+                if (sciInput.includes('!')) {
+                    let num = parseInt(sciInput.split('!')[0]);
+                    let result = 1;
+                    for (let i = 2; i <= num; i++) result *= i;
+                    sciInput = String(result);
+                } else {
+                    sciInput = String(eval(expression));
+                }
+                sciUpdateDisplay();
+            } catch (e) {
+                sciInput = 'Error';
+                sciUpdateDisplay();
+                setTimeout(sciClear, 1500);
+            }
+        }
+
+        // ============ MORTGAGE CALCULATOR ============
+        function calcMortgage() {
+            const amount = parseFloat(document.getElementById('mortgage-amount').value);
+            const rate = parseFloat(document.getElementById('mortgage-rate').value) / 100 / 12;
+            const years = parseInt(document.getElementById('mortgage-years').value);
+            const months = years * 12;
+
+            if (amount <= 0 || rate < 0 || years <= 0) {
+                alert('Please enter valid values');
+                return;
+            }
+
+            const payment = (amount * (rate * Math.pow(1 + rate, months))) / (Math.pow(1 + rate, months) - 1);
+            
+            document.getElementById('mortgage-payment').textContent = '$' + payment.toFixed(2);
+            document.getElementById('mortgage-result').classList.remove('hidden');
+        }
+
+        // ============ BMI CALCULATOR ============
+        function calcBMI() {
+            const height = parseFloat(document.getElementById('bmi-height').value) / 100; // Convert to meters
+            const weight = parseFloat(document.getElementById('bmi-weight').value);
+
+            if (height <= 0 || weight <= 0) {
+                alert('Please enter valid values');
+                return;
+            }
+
+            const bmi = weight / (height * height);
+            let category = '';
+
+            if (bmi < 18.5) category = 'Underweight';
+            else if (bmi < 25) category = 'Normal Weight';
+            else if (bmi < 30) category = 'Overweight';
+            else category = 'Obese';
+
+            document.getElementById('bmi-value').textContent = bmi.toFixed(1);
+            document.getElementById('bmi-category').textContent = category;
+            document.getElementById('bmi-result').classList.remove('hidden');
         }
 
         // ============ IP & GEOLOCATION ============
