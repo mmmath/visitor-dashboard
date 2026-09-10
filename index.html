@@ -15,71 +15,81 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 20px;
+            padding: 0;
         }
 
-        .ad-space {
-            background: #f0f0f0;
-            border: 2px dashed #999;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
+        /* TOP BANNER AD */
+        .ad-banner-top {
+            width: 100%;
+            background: #2c3e50;
+            padding: 15px;
             text-align: center;
-            color: #666;
-            min-height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
         .ad-placeholder {
-            color: #999;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+            border: 2px dashed #999;
+            border-radius: 5px;
+            padding: 20px;
+            color: #666;
             font-weight: 600;
+            font-size: 14px;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        /* HEADER SECTION */
+        .header-section {
             background: white;
             border-radius: 15px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             padding: 40px;
-            max-width: 900px;
-            width: 100%;
-            margin: 0 auto;
+            margin-bottom: 30px;
+            text-align: center;
         }
 
         h1 {
-            text-align: center;
             color: #333;
             margin-bottom: 10px;
             font-size: 28px;
         }
 
         .subtitle {
-            text-align: center;
             color: #666;
             margin-bottom: 30px;
             font-size: 14px;
         }
 
+        /* INFO WIDGETS ROW */
         .info-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         .info-box {
-            background: #f8f9fa;
+            background: white;
             border: 2px solid #e0e0e0;
             border-radius: 10px;
             padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
         }
 
         .info-box:hover {
             border-color: #667eea;
             background: #f0f4ff;
+            transform: translateY(-2px);
         }
 
         .info-label {
@@ -96,7 +106,7 @@
             color: #333;
             font-weight: 600;
             word-break: break-all;
-            line-height: 1.4;
+            line-height: 1.5;
         }
 
         .info-value.loading {
@@ -110,7 +120,7 @@
         }
 
         .weather-icon {
-            font-size: 40px;
+            font-size: 45px;
             flex-shrink: 0;
         }
 
@@ -119,7 +129,7 @@
         }
 
         .weather-temp {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: bold;
             color: #333;
         }
@@ -127,14 +137,14 @@
         .weather-desc {
             font-size: 12px;
             color: #666;
+            margin-top: 4px;
         }
 
         .forecast-row {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
-            gap: 10px;
-            margin-top: 8px;
-            font-size: 12px;
+            gap: 8px;
+            margin-top: 10px;
         }
 
         .forecast-item {
@@ -143,36 +153,82 @@
             border-radius: 4px;
             text-align: center;
             color: #333;
+            font-size: 11px;
         }
 
-        .divider {
-            height: 1px;
-            background: #e0e0e0;
-            margin: 30px 0;
+        .loading-spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* HORIZONTAL AD PLACEMENT 1 */
+        .ad-horizontal-1 {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* CALCULATOR SECTION WITH SIDE ADS */
+        .calculator-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+            align-items: start;
+        }
+
+        /* VERTICAL AD LEFT */
+        .ad-vertical-left {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            min-height: 500px;
+        }
+
+        /* CALCULATOR */
+        .calculator-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
         }
 
         .calculator-section h2 {
             color: #333;
-            margin-bottom: 20px;
-            font-size: 20px;
+            margin-bottom: 25px;
+            font-size: 22px;
         }
 
         .calculator {
             background: #f8f9fa;
             border-radius: 10px;
             padding: 20px;
-            max-width: 400px;
+            max-width: 100%;
         }
 
         .calc-display {
             background: #333;
             color: #fff;
-            font-size: 24px;
-            padding: 15px;
+            font-size: 28px;
+            padding: 20px;
             border-radius: 5px;
             text-align: right;
             margin-bottom: 15px;
-            min-height: 50px;
+            min-height: 60px;
             word-wrap: break-word;
             word-break: break-all;
         }
@@ -180,11 +236,11 @@
         .calc-buttons {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
+            gap: 10px;
         }
 
         button {
-            padding: 15px;
+            padding: 18px;
             font-size: 16px;
             border: none;
             border-radius: 5px;
@@ -229,9 +285,44 @@
             background: #dc2626;
         }
 
+        /* VERTICAL AD RIGHT */
+        .ad-vertical-right {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            min-height: 500px;
+        }
+
+        /* IMAGE SECTION */
+        .image-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .image-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* HORIZONTAL AD PLACEMENT 2 - FOOTER */
+        .ad-horizontal-2 {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
         .status-message {
             text-align: center;
-            padding: 10px;
+            padding: 12px;
             margin-top: 20px;
             border-radius: 5px;
             font-size: 12px;
@@ -247,28 +338,20 @@
             color: #7f1d1d;
         }
 
-        .status-info {
-            background: #dbeafe;
-            color: #1e40af;
-        }
+        @media (max-width: 1024px) {
+            .calculator-wrapper {
+                grid-template-columns: 1fr;
+            }
 
-        .loading-spinner {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #667eea;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            .ad-vertical-left,
+            .ad-vertical-right {
+                min-height: auto;
+                max-height: 150px;
+            }
         }
 
         @media (max-width: 768px) {
-            .container {
+            .header-section {
                 padding: 20px;
             }
 
@@ -282,31 +365,39 @@
             }
 
             .calculator {
-                max-width: 100%;
+                padding: 15px;
             }
 
-            .forecast-row {
-                grid-template-columns: 1fr 1fr;
+            .calc-display {
+                font-size: 20px;
+                padding: 15px;
+            }
+
+            .calc-buttons {
+                gap: 8px;
+            }
+
+            button {
+                padding: 14px;
+                font-size: 14px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- AD PLACEMENT 1 - TOP -->
-    <div class="ad-space">
-        <div class="ad-placeholder">📢 Ad Placement #1 (Top of Page)</div>
+    <!-- AD PLACEMENT 1: TOP BANNER -->
+    <div class="ad-banner-top">
+        <div class="ad-placeholder">📢 Ad Placement #1 - Top Banner (728x90 or Full Width)</div>
     </div>
 
     <div class="container">
-        <h1>📊 Visitor Dashboard</h1>
-        <p class="subtitle">Your IP, Location & Weather in One Place</p>
-
-        <!-- AD PLACEMENT 2 - HEADER -->
-        <div class="ad-space">
-            <div class="ad-placeholder">📢 Ad Placement #2 (Below Header)</div>
+        <!-- HEADER WITH TITLE & SUBTITLE -->
+        <div class="header-section">
+            <h1>📊 Visitor Dashboard</h1>
+            <p class="subtitle">Your IP, Location & Weather in One Place</p>
         </div>
 
-        <!-- Info Row: IP, Geolocation, Weather -->
+        <!-- INFO WIDGETS: IP, LOCATION, WEATHER -->
         <div class="info-row">
             <div class="info-box">
                 <div class="info-label">Your IP Address</div>
@@ -330,55 +421,66 @@
             </div>
         </div>
 
-        <!-- AD PLACEMENT 3 - MIDDLE -->
-        <div class="ad-space">
-            <div class="ad-placeholder">📢 Ad Placement #3 (Middle of Page)</div>
+        <!-- AD PLACEMENT 2: HORIZONTAL BEFORE CALCULATOR -->
+        <div class="ad-horizontal-1">
+            <div class="ad-placeholder">📢 Ad Placement #2 - Horizontal (970x90 or 728x90)</div>
         </div>
 
-        <div class="divider"></div>
+        <!-- CALCULATOR WITH SIDE ADS -->
+        <div class="calculator-wrapper">
+            <!-- AD PLACEMENT 3: VERTICAL LEFT -->
+            <div class="ad-vertical-left">
+                <div class="ad-placeholder">📢 Ad #3<br>Vertical<br>Left<br>(300x600)</div>
+            </div>
 
-        <!-- Calculator Section -->
-        <div class="calculator-section">
-            <h2>🧮 Simple Calculator</h2>
-            <div class="calculator">
-                <div class="calc-display" id="calc-display">0</div>
-                <div class="calc-buttons">
-                    <button class="calc-btn clear" onclick="calcClear()">C</button>
-                    <button class="calc-btn operator" onclick="calcAppend('/')">/</button>
-                    <button class="calc-btn operator" onclick="calcAppend('*')">×</button>
-                    
-                    <button class="calc-btn" onclick="calcAppend('7')">7</button>
-                    <button class="calc-btn" onclick="calcAppend('8')">8</button>
-                    <button class="calc-btn" onclick="calcAppend('9')">9</button>
-                    <button class="calc-btn operator" onclick="calcAppend('-')">−</button>
-                    
-                    <button class="calc-btn" onclick="calcAppend('4')">4</button>
-                    <button class="calc-btn" onclick="calcAppend('5')">5</button>
-                    <button class="calc-btn" onclick="calcAppend('6')">6</button>
-                    <button class="calc-btn operator" onclick="calcAppend('+')">+</button>
-                    
-                    <button class="calc-btn" onclick="calcAppend('1')">1</button>
-                    <button class="calc-btn" onclick="calcAppend('2')">2</button>
-                    <button class="calc-btn" onclick="calcAppend('3')">3</button>
-                    <button class="calc-btn" onclick="calcAppend('.')">.</button>
-                    
-                    <button class="calc-btn" onclick="calcAppend('0')">0</button>
-                    <button class="calc-btn equals" onclick="calcEquals()">=</button>
+            <!-- CALCULATOR (CENTERED) -->
+            <div class="calculator-section">
+                <h2>🧮 Simple Calculator</h2>
+                <div class="calculator">
+                    <div class="calc-display" id="calc-display">0</div>
+                    <div class="calc-buttons">
+                        <button class="calc-btn clear" onclick="calcClear()">C</button>
+                        <button class="calc-btn operator" onclick="calcAppend('/')">/</button>
+                        <button class="calc-btn operator" onclick="calcAppend('*')">×</button>
+                        
+                        <button class="calc-btn" onclick="calcAppend('7')">7</button>
+                        <button class="calc-btn" onclick="calcAppend('8')">8</button>
+                        <button class="calc-btn" onclick="calcAppend('9')">9</button>
+                        <button class="calc-btn operator" onclick="calcAppend('-')">−</button>
+                        
+                        <button class="calc-btn" onclick="calcAppend('4')">4</button>
+                        <button class="calc-btn" onclick="calcAppend('5')">5</button>
+                        <button class="calc-btn" onclick="calcAppend('6')">6</button>
+                        <button class="calc-btn operator" onclick="calcAppend('+')">+</button>
+                        
+                        <button class="calc-btn" onclick="calcAppend('1')">1</button>
+                        <button class="calc-btn" onclick="calcAppend('2')">2</button>
+                        <button class="calc-btn" onclick="calcAppend('3')">3</button>
+                        <button class="calc-btn" onclick="calcAppend('.')">.</button>
+                        
+                        <button class="calc-btn" onclick="calcAppend('0')">0</button>
+                        <button class="calc-btn equals" onclick="calcEquals()">=</button>
+                    </div>
                 </div>
+            </div>
+
+            <!-- AD PLACEMENT 4: VERTICAL RIGHT -->
+            <div class="ad-vertical-right">
+                <div class="ad-placeholder">📢 Ad #4<br>Vertical<br>Right<br>(300x600)</div>
             </div>
         </div>
 
-        <!-- AD PLACEMENT 4 - LOWER -->
-        <div class="ad-space">
-            <div class="ad-placeholder">📢 Ad Placement #4 (Below Calculator)</div>
+        <!-- IMAGE SECTION -->
+        <div class="image-section">
+            <img src="img001.jpg" alt="Featured Image" id="featured-image">
+        </div>
+
+        <!-- AD PLACEMENT 5: HORIZONTAL FOOTER -->
+        <div class="ad-horizontal-2">
+            <div class="ad-placeholder">📢 Ad Placement #5 - Footer Horizontal (970x90 or 728x90)</div>
         </div>
 
         <div id="status-message"></div>
-    </div>
-
-    <!-- AD PLACEMENT 5 - FOOTER -->
-    <div class="ad-space" style="margin-top: 20px; margin-bottom: 20px;">
-        <div class="ad-placeholder">📢 Ad Placement #5 (Footer)</div>
     </div>
 
     <script>
