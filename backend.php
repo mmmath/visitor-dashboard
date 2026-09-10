@@ -136,21 +136,23 @@ function getVisitorData($conn) {
             $weather_code = $weather_data['weather_code'];
             $weather_desc = $weather_data['weather_description'];
             $forecast_json = json_encode($weather_data['today_forecast']);
+            $lat_val = floatval($latitude);
+            $lon_val = floatval($longitude);
             
             $insert_weather = $conn->prepare(
                 "INSERT INTO visitor_weather (ip, visit_time, current_temp, weather_code, weather_description, today_forecast, latitude, longitude) 
                  VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
             );
             $insert_weather->bind_param(
-                "ssiisdd",
+                "ssdisdd",
                 $ip,
                 $now_utc,
                 $current_temp,
                 $weather_code,
                 $weather_desc,
                 $forecast_json,
-                $latitude,
-                $longitude
+                $lat_val,
+                $lon_val
             );
             $insert_weather->execute();
             $insert_weather->close();
@@ -223,7 +225,7 @@ function getGeolocation($ip) {
 // ============ FUNCTION: GET WEATHER DATA ============
 function getWeatherData($lat, $lon) {
     // Using Open-Meteo free API (no key required)
-    $url = "https://api.open-meteo.com/v1/forecast?latitude={$lat}&longitude={$lon}&current=temperature_2m,weather_code,is_day&daily=weather_code,temperature_2m_max,temperature_2m_min,weather_code,precipitation_sum&timezone=UTC";
+    $url = "https://api.open-meteo.com/v1/forecast?latitude={$lat}&longitude={$lon}&current=temperature_2m,weather_code,is_day&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum&timezone=UTC";
     
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
